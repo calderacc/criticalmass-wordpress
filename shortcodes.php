@@ -1,25 +1,20 @@
 <?php
 
-function criticalmassRideList($atts = [], $content = null, $tag = '')
+function criticalmassRideList($attributeList = [], $content = null, $tag = '')
 {
-    var_dump($atts);
+    $attributeList = array_change_key_case((array)$attributeList, CASE_LOWER);
 
-    // normalize attribute keys, lowercase
-    $atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-    // override default attributes with user attributes
-    $wporg_atts = shortcode_atts([
+    $atts = shortcode_atts([
         'title' => 'WordPress.org',
-    ], $atts, $tag);
+        'month' => date('m'),
+        'year' => date('Y'),
+    ], $attributeList, $tag);
 
     // start output
-    $o = '';
+    $o = '<table>';
 
     // start box
-    $o .= '<div class="wporg-box">';
-
-    // title
-    $o .= '<h2>' . esc_html__($wporg_atts['title'], 'wporg') . '</h2>';
+    $o .= '<tr><th>Datum</th><th>Stadt</th><th>Treffpunkt</th></tr>';
 
     // enclosing tags
     if (!is_null($content)) {
@@ -30,9 +25,30 @@ function criticalmassRideList($atts = [], $content = null, $tag = '')
         $o .= do_shortcode($content);
     }
 
-    // end box
-    $o .= '</div>';
+    $rideList = fetchRideData($atts['year'], $atts['month']);
 
-    // return output
+    foreach ($rideList as $ride) {
+        $o .= sprintf('<tr><td>%s</td><td>%s Uhr</td><td>%s</td></tr>', $ride->city->name, date('d.m.Y H:i', $ride->dateTime), $ride->location);
+    }
+
+    $o .= '</table>';
+
     return $o;
+}
+
+function fetchRideData(int $year, int $month): ?array
+{
+    $apiUrl = sprintf('https://criticalmass.in/api/ride/list');
+
+    $response = wp_remote_get($apiUrl);
+
+    $responseCode = $response['response']['code'];
+
+    if (200 !== $responseCode) {
+        return null;
+    }
+
+    $data = json_decode($response['body']);
+
+    return $data;
 }
