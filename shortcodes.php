@@ -37,7 +37,17 @@ function criticalmassRideList($attributeList = [], $content = null, $tag = '')
         $dateTime = new \DateTime(sprintf('@%d', $ride->dateTime));
         $dateTime->setTimezone($timezone);
 
-        $o .= sprintf('<tr><td>%s</td><td>%s Uhr</td><td>%s</td></tr>', $ride->city->name, $dateTime->format('d.m.Y H:i'), $ride->location);
+        $cityLink = sprintf('https://criticalmass.in/%s', $ride->city->mainSlug->slug);
+        $rideLink = sprintf('https://criticalmass.in/%s/%s', $ride->city->mainSlug->slug, $dateTime->format('Y-m-d'));
+
+        $o .= sprintf(
+            '<tr><td><a href="%s">%s</a></td><td><a href="%s">%s Uhr</a></td><td>%s</td></tr>',
+            $cityLink,
+            $ride->city->name,
+            $rideLink,
+            $dateTime->format('d.m.Y H:i'),
+            $ride->location
+        );
     }
 
     $o .= '</table>';
