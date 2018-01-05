@@ -8,3 +8,9 @@ Author: Malte Hübner
 Author URI: https://maltehuebner.de
 License: MIT
 */
+
+require_once __DIR__.'/shortcodes.php';
+
+add_action('init', function() {
+    add_shortcode('criticalmass-ride-list', 'criticalmassRideList');
+});
