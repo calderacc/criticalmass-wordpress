@@ -67,6 +67,9 @@ function sortRideList(array $rideList, $sortFunction): array
     $sortFunctionList = [
         'city' => function($a, $b) {
             return $a->city->name > $b->city->name;
+        },
+        'date' => function($a, $b) {
+            return $a->dateTime > $b->dateTime;
         }
     ];
 
