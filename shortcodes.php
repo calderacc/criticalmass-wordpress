@@ -8,6 +8,7 @@ function criticalmassRideList($attributeList = [], $content = null, $tag = '')
         'title' => 'WordPress.org',
         'month' => date('m'),
         'year' => date('Y'),
+        'sort' => 'city',
         'timezone' => get_option('timezone_string'),
     ], $attributeList, $tag);
 
@@ -59,4 +60,19 @@ function fetchRideData(int $year, int $month): ?array
     $data = json_decode($response['body']);
 
     return $data;
+}
+
+function sortRideList(array $rideList, $sortFunction): array
+{
+    $sortFunctionList = [
+        'city' => function($a, $b) {
+            return $a->city->name > $b->city->name;
+        }
+    ];
+
+    if (array_key_exists($sortFunction, $sortFunctionList)) {
+        usort($rideList, $sortFunctionList[$sortFunction]);
+    }
+
+    return $rideList;
 }
