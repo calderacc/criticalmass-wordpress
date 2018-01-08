@@ -13,4 +13,5 @@ require_once __DIR__.'/shortcodes.php';
 
 add_action('init', function() {
     add_shortcode('criticalmass-ride-list', 'criticalmassRideList');
+    add_shortcode('criticalmass-estimate-list', 'criticalmassEstimateList');
 });
