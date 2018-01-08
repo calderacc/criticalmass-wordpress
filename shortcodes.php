@@ -6,8 +6,11 @@ function criticalmassRideList($attributeList = [], $content = null, $tag = '')
 
     $atts = shortcode_atts([
         'title' => 'WordPress.org',
-        'month' => date('m'),
         'year' => date('Y'),
+        'month' => date('m'),
+        'day' => null,
+        'city' => null,
+        'region' => null,
         'sort' => 'city',
         'timezone' => get_option('timezone_string'),
     ], $attributeList, $tag);
@@ -27,7 +30,7 @@ function criticalmassRideList($attributeList = [], $content = null, $tag = '')
         $o .= do_shortcode($content);
     }
 
-    $rideList = fetchRideData($atts['year'], $atts['month']);
+    $rideList = fetchRideData($atts['year'], $atts['month'], $atts['day'], $atts['city'], $atts['region']);
 
     $rideList = sortRideList($rideList, $atts['sort']);
 
@@ -61,8 +64,11 @@ function criticalmassEstimateList($attributeList = [], $content = null, $tag = '
 
     $atts = shortcode_atts([
         'title' => 'WordPress.org',
-        'month' => date('m'),
         'year' => date('Y'),
+        'month' => date('m'),
+        'day' => null,
+        'city' => null,
+        'region' => null,
         'sort' => 'city',
         'timezone' => get_option('timezone_string'),
     ], $attributeList, $tag);
@@ -82,7 +88,7 @@ function criticalmassEstimateList($attributeList = [], $content = null, $tag = '
         $o .= do_shortcode($content);
     }
 
-    $rideList = fetchRideData($atts['year'], $atts['month']);
+    $rideList = fetchRideData($atts['year'], $atts['month'], $atts['day'], $atts['city'], $atts['region']);
 
     $rideList = sortRideList($rideList, $atts['sort']);
 
@@ -110,9 +116,17 @@ function criticalmassEstimateList($attributeList = [], $content = null, $tag = '
     return $o;
 }
 
-function fetchRideData(int $year, int $month): ?array
+function fetchRideData(int $year, int $month, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
 {
-    $apiUrl = sprintf('https://criticalmass.in/api/ride/list');
+    $parameters = [
+        'year' => $year,
+        'month' => $month,
+        'day' => $day,
+        'city' => $citySlug,
+        'region' => $regionSlug,
+    ];
+
+    $apiUrl = sprintf('https://criticalmass.in/api/ride/?%s', http_build_query($parameters));
 
     $response = wp_remote_get($apiUrl);
 
