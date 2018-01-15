@@ -98,8 +98,14 @@ function criticalmassEstimateList($attributeList = [], $content = null, $tag = '
         $dateTime = new \DateTime(sprintf('@%d', $ride->dateTime));
         $dateTime->setTimezone($timezone);
 
-        $cityLink = sprintf('https://criticalmass.in/%s', $ride->city->mainSlug->slug);
-        $rideLink = sprintf('https://criticalmass.in/%s/%s', $ride->city->mainSlug->slug, $dateTime->format('Y-m-d'));
+        $rideDate = $dateTime->format('Y-m-d');
+        $citySlug = $ride->city->mainSlug->slug;
+
+        $cityLink = sprintf('https://criticalmass.in/%s', $citySlug);
+        $rideLink = sprintf('https://criticalmass.in/%s/%s', $citySlug, $rideDate);
+        $estimateLink = sprintf('https://criticalmass.in/%s/%s/anonymousestimate', $citySlug, $rideDate);
+
+        $estimateLink = sprintf('<a class="criticalmass-estimate-link" href="%s" data-city-slug="%s" data-ride-date="%s">ergänzen</a>', $estimateLink, $citySlug, $rideDate);
 
         $o .= sprintf(
             '<tr><td><a href="%s">%s</a></td><td><a href="%s">%s</a></td><td>%s</td></tr>',
@@ -107,7 +113,7 @@ function criticalmassEstimateList($attributeList = [], $content = null, $tag = '
             $ride->city->name,
             $rideLink,
             $dateTime->format('d.m.Y'),
-            $ride->estimatedParticipants
+            $ride->estimatedParticipants ? $ride->estimatedParticipants : $estimateLink
         );
     }
 
