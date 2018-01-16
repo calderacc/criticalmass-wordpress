@@ -72,16 +72,13 @@ class CriticalmassWidget extends WP_Widget
         $intro = apply_filters('widget_title', $instance['intro']);
         $citySlug = $instance['citySlug'];
 
-        $rideData = $this->rideFactory->getCurrentRideForCitySlug($citySlug);
+        $ride = $this->rideFactory->getCurrentRideForCitySlug($citySlug);
 
-        if (!$rideData) {
+        if (!$ride) {
             return;
         }
 
-        $rideDateTime = new \DateTime(sprintf('@%d', $rideData->dateTime));
-        $rideDateTime->setTimezone($rideData->city->timezone);
-
-        $rideLink = sprintf('https://criticalmass.in/%s/%s', $citySlug, $rideDateTime->format('Y-m-d'));
+        $rideLink = sprintf('https://criticalmass.in/%s/%s', $citySlug, $ride->getDateTime()->format('Y-m-d'));
 
         echo $before_widget;
 
@@ -95,7 +92,7 @@ class CriticalmassWidget extends WP_Widget
             echo sprintf('<p class="widget-text">%s</p>', $intro);
         }
 
-        echo '<p><a href="'.$rideLink.'"><strong>'.$rideData->title.'</strong></a><br /><strong>Datum:</strong> '.$rideDateTime->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$rideData->location.'</p>';
+        echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
 
         echo '</div>';
 

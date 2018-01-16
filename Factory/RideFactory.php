@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../Entity/Ride.php';
+
 class RideFactory
 {
     public function __construct()
@@ -7,7 +9,7 @@ class RideFactory
 
     }
 
-    public function getCurrentRideForCitySlug(string $citySlug): ?\stdClass
+    public function getCurrentRideForCitySlug(string $citySlug): ?Ride
     {
         $apiUrl = sprintf('https://criticalmass.in/api/%s/current', $citySlug);
         $response = wp_remote_get($apiUrl);
@@ -19,6 +21,26 @@ class RideFactory
 
         $data = json_decode($response['body']);
 
-        return $data;
+        $ride = $this->convert($data);
+
+        return $ride;
+    }
+
+    protected function convert(\stdClass $rideData): Ride
+    {
+        $dateTime = new \DateTime(sprintf('@%d', $rideData->dateTime));
+
+        $ride = new Ride();
+
+        $ride
+            ->setTitle($rideData->title)
+            ->setDescription($rideData->description)
+            ->setLocation($rideData->location)
+            ->setDateTime($dateTime)
+            ->setLatitude($rideData->latitude)
+            ->setLongitude($rideData->longitude)
+        ;
+
+        return $ride;
     }
 }
