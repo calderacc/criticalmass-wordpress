@@ -65,6 +65,10 @@ class CriticalmassWidget extends WP_Widget
 
         $rideData = $this->fetchRideData($citySlug);
 
+        if (!$rideData) {
+            return;
+        }
+
         $rideDateTime = new \DateTime(sprintf('@%d', $rideData->dateTime));
         $rideDateTime->setTimezone($rideData->city->timezone);
 
