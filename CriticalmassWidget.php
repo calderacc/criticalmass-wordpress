@@ -1,9 +1,12 @@
 <?php
 
+require_once __DIR__ . '/Factory/CityFactory.php';
 class CriticalmassWidget extends WP_Widget
 {
+    protected $cityFactory;
     public function __construct()
     {
+        $this->cityFactory = new CityFactory();
         parent::__construct('critical-mass-widget',  __('Critical Mass', 'caldera_criticalmass'));
     }
 
@@ -108,24 +111,9 @@ class CriticalmassWidget extends WP_Widget
         return $data;
     }
 
-    protected function fetchCityList(): ?array
-    {
-        $apiUrl = sprintf('https://criticalmass.in/api/city');
-        $response = wp_remote_get($apiUrl);
-        $responseCode = $response['response']['code'];
-
-        if (200 !== $responseCode) {
-            return null;
-        }
-
-        $data = json_decode($response['body']);
-
-        return $data;
-    }
-
     protected function buildCitySelectList(): array
     {
-        $cityList = $this->fetchCityList();
+        $cityList = $this->cityFactory->getCityList();
         $selectList = [];
 
         foreach ($cityList as $city) {
