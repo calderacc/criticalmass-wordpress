@@ -18,6 +18,9 @@ class CriticalmassWidget extends WP_Widget
             $citySlug = '';
             $intro = '';
         }
+
+        $cityList = $this->buildCitySelectList();
+
         ?>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Titel', 'caldera_criticalmass_widget'); ?></label>
@@ -26,7 +29,15 @@ class CriticalmassWidget extends WP_Widget
 
         <p>
             <label for="<?php echo $this->get_field_id('citySlug'); ?>"><?php _e('Stadt:', 'caldera_criticalmass_widget'); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id('citySlug'); ?>" name="<?php echo $this->get_field_name('citySlug'); ?>" type="text" value="<?php echo $citySlug; ?>" />
+            <select id="<?php echo $this->get_field_id('citySlug'); ?>" name="<?php echo $this->get_field_name('citySlug'); ?>" class="widefat" style="width:100%;">
+                <?php
+
+                foreach ($cityList as $slug => $city) {
+                    echo '<option ' . selected($instance['citySlug'], $slug) .' value="' . $slug .'">' . $city . '</option>';
+                }
+
+                ?>
+            </select>
         </p>
 
         <p>
@@ -52,7 +63,7 @@ class CriticalmassWidget extends WP_Widget
         $intro = apply_filters('widget_title', $instance['intro']);
         $citySlug = $instance['citySlug'];
 
-        $rideData = $this->fetchData($citySlug);
+        $rideData = $this->fetchRideData($citySlug);
 
         $rideDateTime = new \DateTime(sprintf('@%d', $rideData->dateTime));
         $rideDateTime->setTimezone($rideData->city->timezone);
@@ -78,7 +89,7 @@ class CriticalmassWidget extends WP_Widget
         echo $after_widget;
     }
 
-    protected function fetchData(string $citySlug): ?\stdClass
+    protected function fetchRideData(string $citySlug): ?\stdClass
     {
         $apiUrl = sprintf('https://criticalmass.in/api/%s/current', $citySlug);
         $response = wp_remote_get($apiUrl);
@@ -91,5 +102,35 @@ class CriticalmassWidget extends WP_Widget
         $data = json_decode($response['body']);
 
         return $data;
+    }
+
+    protected function fetchCityList(): ?array
+    {
+        $apiUrl = sprintf('https://criticalmass.in/api/city');
+        $response = wp_remote_get($apiUrl);
+        $responseCode = $response['response']['code'];
+
+        if (200 !== $responseCode) {
+            return null;
+        }
+
+        $data = json_decode($response['body']);
+
+        return $data;
+    }
+
+    protected function buildCitySelectList(): array
+    {
+        $cityList = $this->fetchCityList();
+        $selectList = [];
+
+        foreach ($cityList as $city) {
+            $citySlug = $city->slug;
+            $city = $city->name;
+
+            $selectList[$citySlug] = $city;
+        }
+
+        return $selectList;
     }
 }
