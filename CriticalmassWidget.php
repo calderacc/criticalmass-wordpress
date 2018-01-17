@@ -42,7 +42,7 @@ class CriticalmassWidget extends WP_Widget
                 <?php
 
                 foreach ($cityList as $slug => $city) {
-                    echo '<option ' . selected($instance['citySlug'], $citySlug) .' value="' . $slug .'">' . $city . '</option>';
+                    echo '<option ' . selected($instance['citySlug'], $slug) .' value="' . $slug .'">' . $city . '</option>';
                 }
 
                 ?>
