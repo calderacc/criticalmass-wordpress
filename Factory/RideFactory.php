@@ -98,6 +98,7 @@ class RideFactory
             ->setDateTime($dateTime)
             ->setLatitude($rideData->latitude)
             ->setLongitude($rideData->longitude)
+            ->setEstimatedParticipants($rideData->estimatedParticipants)
         ;
 
         if ($rideData->city) {

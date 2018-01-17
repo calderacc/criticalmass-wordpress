@@ -42,7 +42,7 @@ class EstimateListShortcode extends AbstractListShortcode
 
         /** @var Ride $ride */
         foreach ($rideList as $ride) {
-            $estimateLink = sprintf('<a class="criticalmass-estimate-link" href="%s" data-city-slug="%s" data-ride-date="%s">ergänzen</a>', LinkUtil::createLinkForRideEstimate($ride));
+            $estimateLink = sprintf('<a class="criticalmass-estimate-link" href="%s">ergänzen</a>', LinkUtil::createLinkForRideEstimate($ride));
 
             $o .= sprintf(
                 '<tr><td><a href="%s">%s</a></td><td><a href="%s">%s</a></td><td>%s</td></tr>',
@@ -50,7 +50,7 @@ class EstimateListShortcode extends AbstractListShortcode
                 $ride->getCity()->getName(),
                 LinkUtil::createLinkForRide($ride),
                 $ride->getDateTime()->setTimezone($timezone)->format('d.m.Y'),
-                $ride->estimatedParticipants ? $ride->estimatedParticipants : $estimateLink
+                $ride->getEstimatedParticipants() ? $ride->getEstimatedParticipants() : $estimateLink
             );
         }
 

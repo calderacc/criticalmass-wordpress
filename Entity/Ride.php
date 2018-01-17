@@ -23,6 +23,9 @@ class Ride
     /** @var float $longitude */
     protected $longitude;
 
+    /** @var int $estimatedParticipants */
+    protected $estimatedParticipants;
+
     public function __construct()
     {
 
@@ -112,4 +115,15 @@ class Ride
         return $this;
     }
 
+    public function getEstimatedParticipants(): ?int
+    {
+        return $this->estimatedParticipants;
+    }
+
+    public function setEstimatedParticipants(int $estimatedParticipants = null): Ride
+    {
+        $this->estimatedParticipants = $estimatedParticipants;
+
+        return $this;
+    }
 }
