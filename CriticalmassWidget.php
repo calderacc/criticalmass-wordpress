@@ -35,6 +35,11 @@ class CriticalmassWidget extends WP_Widget
         </p>
 
         <p>
+            <label for="<?php echo $this->get_field_id('intro'); ?>"><?php _e('Intro:', 'caldera_criticalmass_widget'); ?></label>
+            <textarea class="widefat" id="<?php echo $this->get_field_id('intro'); ?>" name="<?php echo $this->get_field_name('intro'); ?>"><?php echo $intro; ?></textarea>
+        </p>
+
+        <p>
             <label for="<?php echo $this->get_field_id('citySlug'); ?>"><?php _e('Stadt:', 'caldera_criticalmass_widget'); ?></label>
             <select id="<?php echo $this->get_field_id('citySlug'); ?>" name="<?php echo $this->get_field_name('citySlug'); ?>" class="widefat" style="width:100%;">
                 <?php
@@ -46,12 +51,7 @@ class CriticalmassWidget extends WP_Widget
                 ?>
             </select>
         </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id('intro'); ?>"><?php _e('Intro:', 'caldera_criticalmass_widget'); ?></label>
-            <textarea class="widefat" id="<?php echo $this->get_field_id('intro'); ?>" name="<?php echo $this->get_field_name('intro'); ?>"><?php echo $intro; ?></textarea>
-        </p>
-
+        
         <p>
             <input class="checkbox" type="checkbox" <?php checked($instance['useMap'], 'on'); ?> id="<?php echo $this->get_field_id('useMap'); ?>" name="<?php echo $this->get_field_name('useMap'); ?>" />
             <label for="<?php echo $this->get_field_id('useMap'); ?>"><?php _e('Karte anzeigen', 'caldera_criticalmass_widget'); ?></label>
