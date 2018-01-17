@@ -5,6 +5,7 @@ require_once __DIR__ . '/CityFactory.php';
 
 class RideFactory
 {
+    /** @var CityFactory $cityFactory */
     protected $cityFactory;
 
     public function __construct()

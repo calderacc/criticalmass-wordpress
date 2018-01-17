@@ -48,7 +48,7 @@ class RideListShortcode extends AbstractListShortcode
                 LinkUtil::createLinkForCity($ride->getCity()),
                 $ride->getCity()->getName(),
                 LinkUtil::createLinkForRide($ride),
-                $ride->getDateTime()->format('d.m.Y H:i'),
+                $ride->getDateTime()->setTimezone($timezone)->format('d.m.Y H:i'),
                 $ride->getLocation()
             );
 
