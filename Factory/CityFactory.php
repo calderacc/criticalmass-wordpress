@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../Entity/City.php';
+
 class CityFactory
 {
     public function __construct()
@@ -20,5 +22,20 @@ class CityFactory
         $data = json_decode($response['body']);
 
         return $data;
+    }
+
+    public function convert(\stdClass $cityData): City
+    {
+        $city = new City();
+
+        $city
+            ->setSlug($cityData->mainSlug->slug)
+            ->setName($cityData->name)
+            ->setDescription($cityData->description)
+            ->setLatitude($cityData->latitude)
+            ->setLongitude($cityData->longitude)
+        ;
+
+        return $city;
     }
 }

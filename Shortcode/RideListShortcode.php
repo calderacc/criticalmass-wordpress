@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/AbstractListShortcode.php';
+require_once __DIR__.'/../Util/LinkUtil.php';
 
 class RideListShortcode extends AbstractListShortcode
 {
@@ -40,21 +41,15 @@ class RideListShortcode extends AbstractListShortcode
 
         $timezone = new \DateTimeZone($atts['timezone']);
 
+        /** @var Ride $ride */
         foreach ($rideList as $ride) {
-            $dateTime = new \DateTime(sprintf('@%d', $ride->dateTime));
-
-            $dateTime->setTimezone($timezone);
-
-            $cityLink = sprintf('https://criticalmass.in/%s', $ride->city->mainSlug->slug);
-            $rideLink = sprintf('https://criticalmass.in/%s/%s', $ride->city->mainSlug->slug, $dateTime->format('Y-m-d'));
-
             $row = sprintf(
                 '<tr><td><a href="%s">%s</a></td><td><a href="%s">%s Uhr</a></td><td>%s</td></tr>',
-                $cityLink,
-                $ride->city->name,
-                $rideLink,
-                $dateTime->format('d.m.Y H:i'),
-                $ride->location
+                LinkUtil::createLinkForCity($ride->getCity()),
+                $ride->getCity()->getName(),
+                LinkUtil::createLinkForRide($ride),
+                $ride->getDateTime()->format('d.m.Y H:i'),
+                $ride->getLocation()
             );
 
             $o .= $row;

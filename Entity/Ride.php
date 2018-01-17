@@ -2,6 +2,9 @@
 
 class Ride
 {
+    /** @var City $city */
+    protected $city;
+
     /** @var string $title */
     protected $title;
 
@@ -23,6 +26,18 @@ class Ride
     public function __construct()
     {
 
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(City $city = null): Ride
+    {
+        $this->city = $city;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -61,36 +76,36 @@ class Ride
         return $this;
     }
 
-    public function getDateTime(): DateTime
+    public function getDateTime(): ?DateTime
     {
         return $this->dateTime;
     }
 
-    public function setDateTime(DateTime $dateTime): Ride
+    public function setDateTime(DateTime $dateTime = null): Ride
     {
         $this->dateTime = $dateTime;
 
         return $this;
     }
 
-    public function getLatitude(): float
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude): Ride
+    public function setLatitude(float $latitude = null): Ride
     {
         $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitude(): float
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude): Ride
+    public function setLongitude(float $longitude = null): Ride
     {
         $this->longitude = $longitude;
 

@@ -2,11 +2,11 @@
 
 class LinkUtil
 {
-    public static function createLinkForRide(City $city, Ride $ride): string
+    public static function createLinkForRide(Ride $ride): string
     {
         $rideDate = $ride->getDateTime()->format('Y-m-d');
 
-        return sprintf('https://criticalmass.in/%s/%s', $city->getSlug(), $rideDate);
+        return sprintf('https://criticalmass.in/%s/%s', $ride->getCity()->getSlug(), $rideDate);
     }
 
     public static function createLinkForRideEstimate(City $city, Ride $ride): string

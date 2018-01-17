@@ -1,12 +1,15 @@
 <?php
 
 require_once __DIR__ . '/../Entity/Ride.php';
+require_once __DIR__ . '/CityFactory.php';
 
 class RideFactory
 {
+    protected $cityFactory;
+
     public function __construct()
     {
-
+        $this->cityFactory = new CityFactory();
     }
 
     public function fetchRideData(int $year, int $month, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
@@ -31,17 +34,29 @@ class RideFactory
 
         $data = json_decode($response['body']);
 
-        return $data;
+        $rideList = [];
+
+        foreach ($data as $rideData) {
+            $ride = $this->convert($rideData);
+
+            $rideList[] = $ride;
+        }
+
+        return $rideList;
     }
 
     public function sortRideList(array $rideList, $sortFunction): array
     {
+        /**
+         * @var Ride $a
+         * @var Ride $b
+         */
         $sortFunctionList = [
             'city' => function($a, $b) {
-                return $a->city->name > $b->city->name;
+                return $a->getCity()->getName() > $b->getCity()->getName();
             },
             'date' => function($a, $b) {
-                return $a->dateTime > $b->dateTime;
+                return $a->getDateTime() > $b->getDateTime();
             }
         ];
 
@@ -69,7 +84,7 @@ class RideFactory
         return $ride;
     }
 
-    protected function convert(\stdClass $rideData): Ride
+    public function convert(\stdClass $rideData): Ride
     {
         $dateTime = new \DateTime(sprintf('@%d', $rideData->dateTime));
 
@@ -83,6 +98,12 @@ class RideFactory
             ->setLatitude($rideData->latitude)
             ->setLongitude($rideData->longitude)
         ;
+
+        if ($rideData->city) {
+            $city = $this->cityFactory->convert($rideData->city);
+
+            $ride->setCity($city);
+        }
 
         return $ride;
     }
