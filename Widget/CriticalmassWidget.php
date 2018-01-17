@@ -96,9 +96,21 @@ class CriticalmassWidget extends WP_Widget
         }
 
         if ($useMap) {
-            $output.= '<div id="criticalmass-widget-map" style="height: 225px;" data-title="' .$ride->getTitle() .'" data-city-slug="' .$citySlug .'" data-location="'.$ride->getLocation().'" data-date-time="'. $ride->getDateTime()->format('U').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
+            $output.= sprintf('<div id="criticalmass-widget-map" style="height: 225px;" data-title="%s" data-city-slug="%s" data-location="%s" data-date-time="%d" data-latitude="%f" data-longitude="%f"></div>',
+                $ride->getTitle(),
+                $citySlug,
+                $ride->getLocation(),
+                $ride->getDateTime()->format('U'),
+                $ride->getLatitude(),
+                $ride->getLongitude()
+            );
         } else {
-            $output .= '<p><a href="'.LinkUtil::createLinkForRide($ride).'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
+            $output .= sprintf('<p><a href="%s"><strong>%s</strong></a><br /><strong>Datum:</strong> %s Uhr<br /><strong>Treffpunkt:</strong> %s</p>',
+                LinkUtil::createLinkForRide($ride),
+                $ride->getTitle(),
+                $ride->getDateTime()->format('d.m.Y H:i'),
+                $ride->getLocation()
+            );
         }
 
         $output .= '</div>';
