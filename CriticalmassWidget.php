@@ -95,7 +95,7 @@ class CriticalmassWidget extends WP_Widget
 
         echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
 
-        echo '<div id="criticalmass-widget-map" style="height: 150px;" data-city-slug="' .$citySlug .'" data-ride-date="'. $ride->getDateTime()->format('Y-m-d').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
+        echo '<div id="criticalmass-widget-map" style="height: 225px;" data-title="' .$ride->getTitle() .'" data-city-slug="' .$citySlug .'" data-location="'.$ride->getLocation().'" data-date-time="'. $ride->getDateTime()->format('U').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
 
         echo '</div>';
 
