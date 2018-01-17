@@ -34,9 +34,9 @@ class EstimateListShortcode extends AbstractListShortcode
             $o .= do_shortcode($content);
         }
 
-        $rideList = $this->fetchRideData($atts['year'], $atts['month'], $atts['day'], $atts['city'], $atts['region']);
+        $rideList = $this->rideFactory->fetchRideData($atts['year'], $atts['month'], $atts['day'], $atts['city'], $atts['region']);
 
-        $rideList = $this->sortRideList($rideList, $atts['sort']);
+        $rideList = $this->rideFactory->sortRideList($rideList, $atts['sort']);
 
         $timezone = new \DateTimeZone($atts['timezone']);
 
