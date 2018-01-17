@@ -1,25 +1,21 @@
 <?php
 
 require_once __DIR__ . '/../Entity/City.php';
+require_once __DIR__ . '/../Api/Api.php';
 
 class CityFactory
 {
+    /** @var Api $api */
+    protected $api;
+
     public function __construct()
     {
-
+        $this->api = new Api();
     }
 
     public function getCityList(): array
     {
-        $apiUrl = sprintf('https://criticalmass.in/api/city');
-        $response = wp_remote_get($apiUrl);
-        $responseCode = $response['response']['code'];
-
-        if (200 !== $responseCode) {
-            return null;
-        }
-
-        $data = json_decode($response['body']);
+        $data = json_decode($this->api->fetch('city'));
 
         return $data;
     }

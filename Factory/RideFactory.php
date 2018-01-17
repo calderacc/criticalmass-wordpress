@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../Entity/Ride.php';
+require_once __DIR__ . '/../Api/Api.php';
 require_once __DIR__ . '/CityFactory.php';
 
 class RideFactory
@@ -8,9 +9,13 @@ class RideFactory
     /** @var CityFactory $cityFactory */
     protected $cityFactory;
 
+    /** @var Api $api */
+    protected $api;
+
     public function __construct()
     {
         $this->cityFactory = new CityFactory();
+        $this->api = new Api();
     }
 
     public function fetchRideData(int $year, int $month, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
@@ -23,17 +28,7 @@ class RideFactory
             'region' => $regionSlug,
         ];
 
-        $apiUrl = sprintf('https://criticalmass.in/api/ride/?%s', http_build_query($parameters));
-
-        $response = wp_remote_get($apiUrl);
-
-        $responseCode = $response['response']['code'];
-
-        if (200 !== $responseCode) {
-            return null;
-        }
-
-        $data = json_decode($response['body']);
+        $data = json_decode($this->api->fetch('ride', $parameters));
 
         $rideList = [];
 
@@ -70,15 +65,7 @@ class RideFactory
 
     public function getCurrentRideForCitySlug(string $citySlug): ?Ride
     {
-        $apiUrl = sprintf('https://criticalmass.in/api/%s/current', $citySlug);
-        $response = wp_remote_get($apiUrl);
-        $responseCode = $response['response']['code'];
-
-        if (200 !== $responseCode) {
-            return null;
-        }
-
-        $data = json_decode($response['body']);
+        $data = json_decode($this->api->fetch(sprintf('%s/current', $citySlug)));
 
         $ride = $this->convert($data);
 
