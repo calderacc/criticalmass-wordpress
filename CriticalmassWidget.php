@@ -53,6 +53,11 @@ class CriticalmassWidget extends WP_Widget
             <label for="<?php echo $this->get_field_id('intro'); ?>"><?php _e('Intro:', 'caldera_criticalmass_widget'); ?></label>
             <textarea class="widefat" id="<?php echo $this->get_field_id('intro'); ?>" name="<?php echo $this->get_field_name('intro'); ?>"><?php echo $intro; ?></textarea>
         </p>
+
+        <p>
+            <input class="checkbox" type="checkbox" <?php checked($instance['useMap'], 'on'); ?> id="<?php echo $this->get_field_id('useMap'); ?>" name="<?php echo $this->get_field_name('useMap'); ?>" />
+            <label for="<?php echo $this->get_field_id('useMap'); ?>"><?php _e('Karte anzeigen', 'caldera_criticalmass_widget'); ?></label>
+        </p>
         <?php
     }
 
@@ -62,6 +67,7 @@ class CriticalmassWidget extends WP_Widget
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['citySlug'] = strip_tags($new_instance['citySlug']);
         $instance['intro'] = strip_tags($new_instance['intro']);
+        $instance['useMap'] = strip_tags($new_instance['useMap']);
 
         return $instance;
     }
@@ -72,6 +78,7 @@ class CriticalmassWidget extends WP_Widget
         $title = apply_filters('widget_title', $instance['title']);
         $intro = apply_filters('widget_title', $instance['intro']);
         $citySlug = $instance['citySlug'];
+        $useMap = $instance['useMap'] ? true : false;
 
         $ride = $this->rideFactory->getCurrentRideForCitySlug($citySlug);
 
@@ -93,10 +100,12 @@ class CriticalmassWidget extends WP_Widget
             echo sprintf('<p class="widget-text">%s</p>', $intro);
         }
 
-        echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
-
-        echo '<div id="criticalmass-widget-map" style="height: 225px;" data-title="' .$ride->getTitle() .'" data-city-slug="' .$citySlug .'" data-location="'.$ride->getLocation().'" data-date-time="'. $ride->getDateTime()->format('U').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
-
+        if ($useMap) {
+            echo '<div id="criticalmass-widget-map" style="height: 225px;" data-title="' .$ride->getTitle() .'" data-city-slug="' .$citySlug .'" data-location="'.$ride->getLocation().'" data-date-time="'. $ride->getDateTime()->format('U').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
+        } else {
+            echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
+        }
+        
         echo '</div>';
 
         echo $after_widget;
