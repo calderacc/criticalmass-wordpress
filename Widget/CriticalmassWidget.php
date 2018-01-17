@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/Factory/CityFactory.php';
-require_once __DIR__ . '/Factory/RideFactory.php';
+require_once __DIR__ . '/../Factory/CityFactory.php';
+require_once __DIR__ . '/../Factory/RideFactory.php';
 
 class CriticalmassWidget extends WP_Widget
 {
