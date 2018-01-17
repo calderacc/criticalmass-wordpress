@@ -25,10 +25,10 @@ function cmWidgetMap(selector) {
     popupContent += '<strong>Datum:</strong> ' + dateTime.toLocaleString() + ' Uhr<br />';
     popupContent += '<strong>Treffpunkt:</strong> ' + location;
 
-    var map = L.map(selector).setView(centerLatLng, 13);
+    var map = L.map(selector, { zoomControl: false }).setView(centerLatLng, 13);
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+        attribution: 'Wikimedia maps beta | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     }).addTo(map);
 
     L.marker(centerLatLng).addTo(map)
