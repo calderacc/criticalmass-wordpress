@@ -40,25 +40,16 @@ class EstimateListShortcode extends AbstractListShortcode
 
         $timezone = new \DateTimeZone($atts['timezone']);
 
+        /** @var Ride $ride */
         foreach ($rideList as $ride) {
-            $dateTime = new \DateTime(sprintf('@%d', $ride->dateTime));
-            $dateTime->setTimezone($timezone);
-
-            $rideDate = $dateTime->format('Y-m-d');
-            $citySlug = $ride->city->mainSlug->slug;
-
-            $cityLink = sprintf('https://criticalmass.in/%s', $citySlug);
-            $rideLink = sprintf('https://criticalmass.in/%s/%s', $citySlug, $rideDate);
-            $estimateLink = sprintf('https://criticalmass.in/%s/%s/anonymousestimate', $citySlug, $rideDate);
-
-            $estimateLink = sprintf('<a class="criticalmass-estimate-link" href="%s" data-city-slug="%s" data-ride-date="%s">ergänzen</a>', $estimateLink, $citySlug, $rideDate);
+            $estimateLink = sprintf('<a class="criticalmass-estimate-link" href="%s" data-city-slug="%s" data-ride-date="%s">ergänzen</a>', LinkUtil::createLinkForRideEstimate($ride));
 
             $o .= sprintf(
                 '<tr><td><a href="%s">%s</a></td><td><a href="%s">%s</a></td><td>%s</td></tr>',
-                $cityLink,
-                $ride->city->name,
-                $rideLink,
-                $dateTime->format('d.m.Y'),
+                LinkUtil::createLinkForCity($ride->getCity()),
+                $ride->getCity()->getName(),
+                LinkUtil::createLinkForRide($ride),
+                $ride->getDateTime()->setTimezone($timezone)->format('d.m.Y'),
                 $ride->estimatedParticipants ? $ride->estimatedParticipants : $estimateLink
             );
         }
