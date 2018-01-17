@@ -62,6 +62,7 @@ class CriticalmassWidget extends WP_Widget
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['citySlug'] = strip_tags($new_instance['citySlug']);
         $instance['intro'] = strip_tags($new_instance['intro']);
+
         return $instance;
     }
 
@@ -93,6 +94,8 @@ class CriticalmassWidget extends WP_Widget
         }
 
         echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
+
+        echo '<div id="criticalmass-widget-map" style="height: 150px;" data-city-slug="' .$citySlug .'" data-ride-date="'. $ride->getDateTime()->format('Y-m-d').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
 
         echo '</div>';
 
