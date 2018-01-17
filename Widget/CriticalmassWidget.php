@@ -72,7 +72,6 @@ class CriticalmassWidget extends WP_Widget
 
     function widget($args, $instance)
     {
-        extract($args);
         $title = apply_filters('widget_title', $instance['title']);
         $intro = apply_filters('widget_title', $instance['intro']);
         $citySlug = $instance['citySlug'];
@@ -84,29 +83,29 @@ class CriticalmassWidget extends WP_Widget
             return;
         }
 
-        $rideLink = sprintf('https://criticalmass.in/%s/%s', $citySlug, $ride->getDateTime()->format('Y-m-d'));
-
-        echo $before_widget;
+        $output = $args['before_widget'];
 
         if ($title) {
-            echo $before_title . $title . $after_title;
+            $output .= sprintf('%s%s%s', $args['before_title'], $title, $args['after_title']);
         }
 
-        echo '<div class="widget-text wp_widget_plugin_box">';
+        $output .= '<div class="widget-text wp_widget_plugin_box">';
 
         if ($intro) {
-            echo sprintf('<p class="widget-text">%s</p>', $intro);
+            $output .= sprintf('<p class="widget-text">%s</p>', $intro);
         }
 
         if ($useMap) {
-            echo '<div id="criticalmass-widget-map" style="height: 225px;" data-title="' .$ride->getTitle() .'" data-city-slug="' .$citySlug .'" data-location="'.$ride->getLocation().'" data-date-time="'. $ride->getDateTime()->format('U').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
+            $output.= '<div id="criticalmass-widget-map" style="height: 225px;" data-title="' .$ride->getTitle() .'" data-city-slug="' .$citySlug .'" data-location="'.$ride->getLocation().'" data-date-time="'. $ride->getDateTime()->format('U').'" data-latitude="'.$ride->getLatitude().'" data-longitude="'.$ride->getLongitude().'"></div>';
         } else {
-            echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
+            $output .= '<p><a href="'.LinkUtil::createLinkForRide($ride).'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
         }
 
-        echo '</div>';
+        $output .= '</div>';
 
-        echo $after_widget;
+        $output .= $args['after_widget'];
+
+        echo $output;
     }
 
     protected function buildCitySelectList(): array
