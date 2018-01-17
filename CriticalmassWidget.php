@@ -20,11 +20,9 @@ class CriticalmassWidget extends WP_Widget
     {
         if( $instance) {
             $title = esc_attr($instance['title']);
-            $citySlug = esc_attr($instance['citySlug']);
             $intro = esc_attr($instance['intro']);
         } else {
             $title = '';
-            $citySlug = '';
             $intro = '';
         }
 
@@ -105,7 +103,7 @@ class CriticalmassWidget extends WP_Widget
         } else {
             echo '<p><a href="'.$rideLink.'"><strong>'.$ride->getTitle().'</strong></a><br /><strong>Datum:</strong> '.$ride->getDateTime()->format('d.m.Y H:i').' Uhr<br /><strong>Treffpunkt:</strong> '.$ride->getLocation().'</p>';
         }
-        
+
         echo '</div>';
 
         echo $after_widget;
