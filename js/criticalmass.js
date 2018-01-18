@@ -1,10 +1,33 @@
 function cmEstimateParticipants(e) {
     e.preventDefault();
 
-    var link = (jQuery(this).attr('href'));
+    var $link = jQuery(this);
+    var url = ($link.attr('href'));
 
-    window.open(link, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=400,height=400');
+    var popup = window.open(url, '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,width=400,height=400');
+
+    var timer = setInterval(function() {
+        if(popup.closed) {
+            clearInterval(timer);
+            refreshEstimatedParticipants($link);
+        }
+    }, 500);
+
     return false;
+}
+
+function refreshEstimatedParticipants($link) {
+
+    jQuery.ajax({
+        dataType: 'json',
+        url: 'https://criticalmass.in/api/norderstedt/2018-01-05',
+        success: function(rideData) {
+            var estimatedParticipants = rideData.estimatedParticipants;
+
+            $link.parent().append(estimatedParticipants);
+            $link.remove();
+        }
+    });
 }
 
 function cmWidgetMap(selector) {
