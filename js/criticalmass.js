@@ -17,15 +17,19 @@ function cmEstimateParticipants(e) {
 }
 
 function refreshEstimatedParticipants($link) {
-
+    var url = $link.attr('href');
+    url = url.replace('https://criticalmass.in/', 'https://criticalmass.in/api/').replace('/anonymousestimate', '');
+    
     jQuery.ajax({
         dataType: 'json',
-        url: 'https://criticalmass.in/api/norderstedt/2018-01-05',
+        url: url,
         success: function(rideData) {
             var estimatedParticipants = rideData.estimatedParticipants;
 
-            $link.parent().append(estimatedParticipants);
-            $link.remove();
+            if (estimatedParticipants) {
+                $link.parent().append(estimatedParticipants);
+                $link.remove();
+            }
         }
     });
 }
