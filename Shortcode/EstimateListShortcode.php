@@ -9,7 +9,6 @@ class EstimateListShortcode extends AbstractListShortcode
         $attributeList = array_change_key_case((array)$attributeList, CASE_LOWER);
 
         $atts = shortcode_atts([
-            'title' => 'WordPress.org',
             'year' => date('Y'),
             'month' => date('m'),
             'day' => null,
