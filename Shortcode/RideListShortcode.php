@@ -105,7 +105,7 @@ class RideListShortcode extends AbstractListShortcode
     {
         $rideList = $this->rideFactory->fetchRideData($this->atts['year'], $this->atts['month'], $this->atts['day'], $this->atts['city'], $this->atts['region']);
 
-        $rideList = $this->rideFactory->sortRideList($rideList, $this->atts['sort']);
+        $rideList = $this->rideFactory->sortRideList($rideList, $this->atts['sort-col'], $this->atts['sort-order']);
 
         return $rideList;
     }
@@ -118,7 +118,8 @@ class RideListShortcode extends AbstractListShortcode
             'day' => null,
             'city' => null,
             'region' => null,
-            'sort' => 'city',
+            'sort-col' => 'city',
+            'sort-order' => 'asc',
             'timezone' => get_option('timezone_string'),
             'col-estimation' => false,
             'col-location' => true,
@@ -137,6 +138,10 @@ class RideListShortcode extends AbstractListShortcode
 
         if (!intval($atts['day']) && !is_null($atts['day'])) {
             throw new InvalidParameterException(sprintf('Ungültige Tagesangabe: %s', $atts['day']));
+        }
+
+        if (!in_array($atts['sort-order'], ['asc', 'desc'])) {
+            throw new InvalidParameterException(sprintf('Ungültige Sortierreihenfolge: %s', $atts['sort-order']));
         }
 
         try {

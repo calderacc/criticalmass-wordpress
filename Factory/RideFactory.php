@@ -42,21 +42,31 @@ class RideFactory
         return $rideList;
     }
 
-    public function sortRideList(array $rideList, $sortFunction): array
+    public function sortRideList(array $rideList, string $sortFunction, string $sortOrder): array
     {
+        if ('asc' === $sortOrder) {
+            $compareFunction = function ($a, $b) {
+                return $a > $b;
+            };
+        } else {
+            $compareFunction = function ($a, $b) {
+                return $a < $b;
+            };
+        }
+
         /**
          * @var Ride $a
          * @var Ride $b
          */
         $sortFunctionList = [
-            'city' => function($a, $b) {
-                return $a->getCity()->getName() > $b->getCity()->getName();
+            'city' => function($a, $b) use ($compareFunction) {
+                return $compareFunction($a->getCity()->getName(), $b->getCity()->getName());
             },
-            'date' => function($a, $b) {
-                return $a->getDateTime() > $b->getDateTime();
+            'date' => function($a, $b) use ($compareFunction) {
+                return $compareFunction($a->getDateTime(), $b->getDateTime());
             },
-            'participants' => function($a, $b) {
-                return $a->getEstimatedParticipants() > $b->getEstimatedParticipants();
+            'estimation' => function($a, $b) use ($compareFunction) {
+                return $compareFunction($a->getEstimatedParticipants(), $b->getEstimatedParticipants());
             }
         ];
 

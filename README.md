@@ -69,7 +69,8 @@ Beispielsweise lautet der Slug für Hamburg `hamburg` und für München `muenche
 
 #### Sortierreihenfolge
 
-- `sort`: Gibt an, nach welchem Wert die Tabelle sortiert werden soll. Mögliche Werte sind `city`, `date` und `participants`. (Standardwert: `city`)
+- `sort-col`: Gibt an, nach welchem Wert die Tabelle sortiert werden soll. Mögliche Werte sind `city`, `date` und `estimation`. (Standardwert: `city`)
+- `sort-order`: Benennt die Sortierreihenfolge. Mögliche Werte sind `asc` und `desc`. (Standardwert: `asc`)
 
 #### Datumsdarstellungen
 
