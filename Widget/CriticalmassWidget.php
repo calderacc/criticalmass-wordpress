@@ -16,9 +16,9 @@ class CriticalmassWidget extends WP_Widget
         parent::__construct('critical-mass-widget',  __('Critical Mass', 'caldera_criticalmass'));
     }
 
-    public function form($instance)
+    public function form($instance): void
     {
-        if( $instance) {
+        if ($instance) {
             $title = esc_attr($instance['title']);
             $intro = esc_attr($instance['intro']);
         } else {
@@ -75,7 +75,7 @@ class CriticalmassWidget extends WP_Widget
         return $instance;
     }
 
-    function widget($args, $instance)
+    public function widget($args, $instance): void
     {
         $title = apply_filters('widget_title', $instance['title']);
         $intro = apply_filters('widget_title', $instance['intro']);
