@@ -18,7 +18,7 @@ class Api
     {
         $apiUrl = sprintf('%s/%s?%s', self::API_HOSTNAME,$endpoint, http_build_query($parameter));
 
-        if ($this->cache->isCached($apiUrl)) {
+        if (!WP_DEBUG && $this->cache->isCached($apiUrl)) {
             return $this->cache->get($apiUrl);
         }
 
