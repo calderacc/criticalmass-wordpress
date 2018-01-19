@@ -31,96 +31,96 @@ class Ride
 
     }
 
-    public function getCity(): ?City
+    public function getCity()
     {
         return $this->city;
     }
 
-    public function setCity(City $city = null): Ride
+    public function setCity(City $city = null)
     {
         $this->city = $city;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle(string $title = null): Ride
+    public function setTitle($title = null)
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription()
     {
         return $this->description;
     }
 
-    public function setDescription(string $description = null): Ride
+    public function setDescription($description = null)
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getLocation()
     {
         return $this->location;
     }
 
-    public function setLocation(string $location = null): Ride
+    public function setLocation($location = null)
     {
         $this->location = $location;
 
         return $this;
     }
 
-    public function getDateTime(): ?DateTime
+    public function getDateTime()
     {
         return $this->dateTime;
     }
 
-    public function setDateTime(DateTime $dateTime = null): Ride
+    public function setDateTime(\DateTime $dateTime = null)
     {
         $this->dateTime = $dateTime;
 
         return $this;
     }
 
-    public function getLatitude(): ?float
+    public function getLatitude()
     {
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude = null): Ride
+    public function setLatitude($latitude = null)
     {
         $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitude(): ?float
+    public function getLongitude()
     {
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude = null): Ride
+    public function setLongitude($longitude = null)
     {
         $this->longitude = $longitude;
 
         return $this;
     }
 
-    public function getEstimatedParticipants(): ?int
+    public function getEstimatedParticipants()
     {
         return $this->estimatedParticipants;
     }
 
-    public function setEstimatedParticipants(int $estimatedParticipants = null): Ride
+    public function setEstimatedParticipants($estimatedParticipants = null)
     {
         $this->estimatedParticipants = $estimatedParticipants;
 

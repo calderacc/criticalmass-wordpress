@@ -16,7 +16,7 @@ class CriticalmassWidget extends WP_Widget
         parent::__construct('critical-mass-widget',  __('Critical Mass', 'caldera_criticalmass'));
     }
 
-    public function form($instance): void
+    public function form($instance)
     {
         if ($instance) {
             $title = esc_attr($instance['title']);
@@ -75,7 +75,7 @@ class CriticalmassWidget extends WP_Widget
         return $instance;
     }
 
-    public function widget($args, $instance): void
+    public function widget($args, $instance)
     {
         $title = apply_filters('widget_title', $instance['title']);
         $intro = apply_filters('widget_title', $instance['intro']);
@@ -129,7 +129,7 @@ class CriticalmassWidget extends WP_Widget
         echo $output;
     }
 
-    protected function buildCitySelectList(): array
+    protected function buildCitySelectList()
     {
         $cityList = $this->cityFactory->getCityList();
         $selectList = [];

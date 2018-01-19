@@ -8,17 +8,17 @@ class Cache
     {
     }
 
-    public function isCached(string $key): bool
+    public function isCached($key)
     {
         return get_transient($key);
     }
 
-    public function set(string $key, string $data): bool
+    public function set($key, $data)
     {
         return set_transient($key, $data, self::TTL);
     }
 
-    public function get(string $key): ?string
+    public function get($key)
     {
         return get_transient($key);
     }

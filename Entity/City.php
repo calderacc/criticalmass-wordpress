@@ -22,60 +22,60 @@ class City
 
     }
 
-    public function getName(): ?string
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name = null): City
+    public function setName($name = null)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
 
-    public function setDescription(string $description = null): City
+    public function setDescription($description = null)
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSlug()
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug = null): City
+    public function setSlug($slug = null)
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function getLatitude(): ?float
+    public function getLatitude()
     {
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude = null): City
+    public function setLatitude($latitude = null)
     {
         $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitude(): ?float
+    public function getLongitude()
     {
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude = null): City
+    public function setLongitude($longitude = null)
     {
         $this->longitude = $longitude;
 

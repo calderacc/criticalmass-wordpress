@@ -13,14 +13,14 @@ class CityFactory
         $this->api = new Api();
     }
 
-    public function getCityList(): array
+    public function getCityList()
     {
         $data = json_decode($this->api->fetch('city'));
 
         return $data;
     }
 
-    public function convert(\stdClass $cityData): City
+    public function convert(\stdClass $cityData)
     {
         $city = new City();
 

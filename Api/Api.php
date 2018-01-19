@@ -15,7 +15,7 @@ class Api
         $this->cache = new Cache();
     }
 
-    public function fetch(string $endpoint, array $parameter = []): ?string
+    public function fetch($endpoint, array $parameter = [])
     {
         $apiUrl = sprintf('%s/%s?%s', self::API_HOSTNAME,$endpoint, http_build_query($parameter));
 

@@ -9,7 +9,7 @@ class RideListShortcode extends AbstractListShortcode
     /** @var array $atts */
     protected $atts = [];
 
-    public function rideList($attributeList = [], $content = null, $tag = ''): string
+    public function rideList($attributeList = [], $content = null, $tag = '')
     {
         try {
             $attributeList = array_change_key_case((array)$attributeList, CASE_LOWER);
@@ -37,7 +37,7 @@ class RideListShortcode extends AbstractListShortcode
         return $o;
     }
 
-    protected function createTableHeader(): string
+    protected function createTableHeader()
     {
         $headerRow = '<tr>';
 
@@ -63,7 +63,7 @@ class RideListShortcode extends AbstractListShortcode
 
     }
 
-    protected function createTableRow(Ride $ride): string
+    protected function createTableRow(Ride $ride)
     {
         $timezone = new \DateTimeZone($this->atts['timezone']);
 
@@ -94,14 +94,14 @@ class RideListShortcode extends AbstractListShortcode
         return $row;
     }
 
-    protected function showColumn(string $col): bool
+    protected function showColumn($col)
     {
         $value = $this->atts[sprintf('col-%s', $col)];
 
         return $value === 'true' || $value === true;
     }
 
-    protected function getRideList(): array
+    protected function getRideList()
     {
         $rideList = $this->rideFactory->fetchRideData($this->atts['year'], $this->atts['month'], $this->atts['day'], $this->atts['city'], $this->atts['region']);
 
@@ -110,7 +110,7 @@ class RideListShortcode extends AbstractListShortcode
         return $rideList;
     }
 
-    protected function validateAttributes(array $attributeList = [], string $tag = ''): array
+    protected function validateAttributes(array $attributeList = [], $tag = '')
     {
         $atts = shortcode_atts([
             'year' => null,
@@ -153,7 +153,7 @@ class RideListShortcode extends AbstractListShortcode
         return $atts;
     }
 
-    protected function enforceDateTime(): void
+    protected function enforceDateTime()
     {
         if (!$this->atts['city'] && !$this->atts['year'] && !$this->atts['month']) {
             $dateTime = new \DateTime();

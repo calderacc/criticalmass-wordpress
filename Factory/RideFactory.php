@@ -19,7 +19,7 @@ class RideFactory
         $this->api = new Api();
     }
 
-    public function fetchRideData(int $year = null, int $month = null, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
+    public function fetchRideData($year = null, $month = null, $day = null, $citySlug = null, $regionSlug = null)
     {
         $parameters = [
             'year' => $year,
@@ -42,7 +42,7 @@ class RideFactory
         return $rideList;
     }
 
-    public function sortRideList(array $rideList, string $sortFunction, string $sortOrder): array
+    public function sortRideList(array $rideList, $sortFunction, $sortOrder)
     {
         if ('asc' === $sortOrder) {
             $compareFunction = function ($a, $b) {
@@ -79,7 +79,7 @@ class RideFactory
         return $rideList;
     }
 
-    public function getCurrentRideForCitySlug(string $citySlug): ?Ride
+    public function getCurrentRideForCitySlug($citySlug)
     {
         $data = json_decode($this->api->fetch(sprintf('%s/current', $citySlug)));
 
@@ -88,7 +88,7 @@ class RideFactory
         return $ride;
     }
 
-    public function convert(\stdClass $rideData): Ride
+    public function convert(\stdClass $rideData)
     {
         $dateTime = new \DateTime(sprintf('@%d', $rideData->dateTime));
 
