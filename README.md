@@ -1,12 +1,11 @@
-# criticalmass-wp
+# criticalmass-wordpress
 
 Dieses Plugin ermöglicht es dir, Informationen über Critical-Mass-Touren in deinem Blog anzuzeigen.
 
-Bislang sind diese drei Funktionen möglich:
+Bislang sind diese zwei Funktionen möglich:
 
 1. Zeige in der Sidebar das Datum und den Treffpunkt für die nächste Critical Mass in deiner Stadt an.
 2. Binde eine Liste mit Critical-Mass-Touren aus deiner Region oder deinem Land ein.
-3. Lade deine Besucher ein, Teilnehmerzahlen für Critical-Mass-Touren zu schätzen.
 
 # Systemvoraussetzungen
 
@@ -47,13 +46,46 @@ Wenn du möchtest, kannst du die Tourdaten auch auf einer kleinen Karte anzeigen
 ## Tourliste
 
 Mit dem Shortcode `[criticalmass-ride-list]` kannst du eine tabellarische Tourliste in einem Beitrag oder einer Seite einbetten. Die Liste zeigt in drei Spalten jeweils den Namen der Stadt, sowie Datum und Uhrzeit und den Treffpunkt der aktuellen Tour.
- 
+
+### Parameter
 Du kannst die Darstellung der Liste mit einer Reihe von zusätzlichen Parametern beeinflussen:
 
-- `year`
-- `month`
-- `day`
-- `city`
-- `region`
-- `sort`
-- `timezone`
+#### Datumsangaben
+
+Mit diesen drei Parametern kannst du die Tabelleninhalte auf einen bestimmten Zeitraum beschränken.
+
+- `year`: Jahresangabe (Standardwert: die aktuelle Jahreszahl)
+- `month`: Monatsangabe. Kann nur in Kombination mit der Jahresangabe eingesetzt werden.
+- `day`: Tagesangabe. Kann nur in Kombination mit Monats- und Jahresangabe eingesetzt werden.
+
+#### Geografische Angaben
+
+- `city`: Zeige lediglich Touren aus der angegebenen Stadt an.
+- `region`: Zeige lediglich Touren aus der angegebenen Region an.
+
+Bei den Werten für diese Parameter handelt es sich um so genannte Slugs, die du bei [criticalmass.in](https://criticalmass.in/) aus der URL einer Stadt oder aus dem [Verzeichnis](https://criticalmass.in/world) ablesen kannst.
+
+Beispielsweise lautet der Slug für Hamburg `hamburg` und für München `muenchen`. Für Touren aus Deutschland kannst du die Region `germany` angeben, für Touren aus Schleswig-Holstein die Region `schleswig-holstein`.
+
+#### Sortierreihenfolge
+
+- `sort`: Gibt an, nach welchem Wert die Tabelle sortiert werden soll. Mögliche Werte sind `city`, `date` und `participants`. (Standardwert: `city`)
+
+#### Datumsdarstellungen
+
+- `timezone`: Angabe der Zeitzone. Ohne diesen Parameter wird die jeweilige Zeitzone deines Wordpress-Blogs verwendet.
+- `date-format`: Steuert die Formatierung der Datumsangabe mit der [`date`](http://php.net/manual/de/function.date.php)-Funktion. (Standardwert: `d.m.Y H:i`)
+
+#### anzuzeigende Spalten
+
+Du kannst mit diesen vier Parametern die anzuzeigenden Spalten konfigurieren. Mögliche Werte sind jeweils `true` und `false`:
+- `col-city`: Stadt (Standardwert: `true`)
+- `col-location`: Treffpunkt (Standardwert: `true`)
+- `col-datetime`: Datum und Uhrzeit (Standardwert: `true`)
+- `col-estimation`: Teilnehmerzahlen (Standardwert: `false`)
+
+### Beispiele
+
+- `[criticalmass-ride-list city="hamburg" year="2017" col-city=false]`: Zeige alle Touren aus Hamburg aus dem Jahr 2017 und verstecke den Städtenamen.
+- `[criticalmass-ride-list region="germany" year="2017" month="12" col-estimation="true"]`: Zeige alle deutschen Critical-Mass-Touren mitsamt der geschätzten Teilnehmerzahlen aus dem Dezember 2017.
+- `[criticalmass-ride-list region="nordrhein-westfalen" year="2017" month="12" day="29"]`: Alle Touren in Nordrhein-Westfalen am 29. Dezember 2017.
