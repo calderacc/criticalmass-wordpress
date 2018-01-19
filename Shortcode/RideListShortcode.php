@@ -125,15 +125,15 @@ class RideListShortcode extends AbstractListShortcode
             'date-format' => 'd.m.Y H:i',
         ], $attributeList, $tag);
 
-        if (!is_integer($atts['year']) && !is_null($atts['year'])) {
+        if (!intval($atts['year']) && !is_null($atts['year'])) {
             throw new InvalidParameterException(sprintf('Ungültige Jahresangabe: %s', $atts['year']));
         }
 
-        if (!is_integer($atts['month']) && !is_null($atts['month'])) {
+        if (!intval($atts['month']) && !is_null($atts['month'])) {
             throw new InvalidParameterException(sprintf('Ungültige Monatssangabe: %s', $atts['month']));
         }
 
-        if (!is_integer($atts['day']) && !is_null($atts['day'])) {
+        if (!intval($atts['day']) && !is_null($atts['day'])) {
             throw new InvalidParameterException(sprintf('Ungültige Tagesangabe: %s', $atts['day']));
         }
 
