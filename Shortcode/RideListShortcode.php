@@ -155,7 +155,7 @@ class RideListShortcode extends AbstractListShortcode
 
     protected function enforceDateTime(): void
     {
-        if (!$this->atts['city']) {
+        if (!$this->atts['city'] && !$this->atts['year'] && !$this->atts['month']) {
             $dateTime = new \DateTime();
 
             $this->atts['year'] = $dateTime->format('Y');
