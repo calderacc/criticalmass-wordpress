@@ -66,5 +66,9 @@ function cmWidgetMap(selector) {
 window.onload = function () {
     jQuery('.criticalmass-estimate-link').click(cmEstimateParticipants);
 
-    cmWidgetMap('criticalmass-widget-map');
+    jQuery('.criticalmass-widget-map').each(function() {
+        var elementId = jQuery(this).attr('id');
+
+        cmWidgetMap(elementId);
+    });
 };

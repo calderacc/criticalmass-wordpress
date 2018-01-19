@@ -102,7 +102,10 @@ class CriticalmassWidget extends WP_Widget
         }
 
         if ($useMap) {
-            $output.= sprintf('<div id="criticalmass-widget-map" style="height: 225px;" data-title="%s" data-city-slug="%s" data-location="%s" data-date-time="%d" data-latitude="%f" data-longitude="%f"></div>',
+            $mapId = sprintf('criticalmass-widget-map-%s', $citySlug);
+
+            $output.= sprintf('<div id="%s" class="criticalmass-widget-map" style="height: 225px;" data-title="%s" data-city-slug="%s" data-location="%s" data-date-time="%d" data-latitude="%f" data-longitude="%f"></div>',
+                $mapId,
                 $ride->getTitle(),
                 $citySlug,
                 $ride->getLocation(),
