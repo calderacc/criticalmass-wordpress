@@ -4,6 +4,8 @@ require_once __DIR__ . '/../Cache/Cache.php';
 
 class Api
 {
+    const API_HOSTNAME = 'https://criticalmass.in/api';
+
     /** @var Cache $cache */
     protected $cache;
 
@@ -14,7 +16,7 @@ class Api
 
     public function fetch(string $endpoint, array $parameter = []): ?string
     {
-        $apiUrl = sprintf('https://criticalmass.in/api/%s?%s', $endpoint, http_build_query($parameter));
+        $apiUrl = sprintf('%s/%s?%s', self::API_HOSTNAME,$endpoint, http_build_query($parameter));
 
         if ($this->cache->isCached($apiUrl)) {
             return $this->cache->get($apiUrl);
