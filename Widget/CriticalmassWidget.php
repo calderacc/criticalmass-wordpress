@@ -26,7 +26,12 @@ class CriticalmassWidget extends WP_Widget
             $intro = '';
         }
 
-        $cityList = $this->buildCitySelectList();
+        try {
+            $cityList = $this->buildCitySelectList();
+        } catch (\Exception $exception) {
+            echo sprintf('<code>Fehler beim Rendern des Critical-Mass-Widgets: %s</code>', $exception->getMessage());
+            return;
+        }
 
         ?>
         <p>
@@ -77,9 +82,10 @@ class CriticalmassWidget extends WP_Widget
         $citySlug = $instance['citySlug'];
         $useMap = $instance['useMap'] ? true : false;
 
-        $ride = $this->rideFactory->getCurrentRideForCitySlug($citySlug);
-
-        if (!$ride) {
+        try {
+            $ride = $this->rideFactory->getCurrentRideForCitySlug($citySlug);
+        } catch (\Exception $exception) {
+            echo sprintf('<code>Fehler beim Rendern des Critical-Mass-Widgets: %s</code>', $exception->getMessage());
             return;
         }
 

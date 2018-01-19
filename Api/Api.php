@@ -1,10 +1,11 @@
 <?php
 
 require_once __DIR__ . '/../Cache/Cache.php';
+require_once __DIR__.'/../Exception/ApiException.php';
 
 class Api
 {
-    const API_HOSTNAME = 'https://criticalmass.in/api';
+    const API_HOSTNAME = 'http://criticalmass.in/api';
 
     /** @var Cache $cache */
     protected $cache;
@@ -18,16 +19,14 @@ class Api
     {
         $apiUrl = sprintf('%s/%s?%s', self::API_HOSTNAME,$endpoint, http_build_query($parameter));
 
-        if (!WP_DEBUG && $this->cache->isCached($apiUrl)) {
+        /*if (!WP_DEBUG && $this->cache->isCached($apiUrl)) {
             return $this->cache->get($apiUrl);
-        }
+        }*/
 
         $response = wp_remote_get($apiUrl);
 
-        $responseCode = $response['response']['code'];
-
-        if (200 !== $responseCode) {
-            return null;
+        if (!is_array($response) || 200 !== $response['response']['code']) {
+            throw new Exception(sprintf('Api-Endpunkt %s nicht erreichbar oder ungültige Antwort', $apiUrl));
         }
 
         $this->cache->set($apiUrl, $response['body']);

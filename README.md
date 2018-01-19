@@ -54,7 +54,7 @@ Du kannst die Darstellung der Liste mit einer Reihe von zusätzlichen Parametern
 
 Mit diesen drei Parametern kannst du die Tabelleninhalte auf einen bestimmten Zeitraum beschränken.
 
-- `year`: Jahresangabe (Standardwert: die aktuelle Jahreszahl)
+- `year`: Jahresangabe.
 - `month`: Monatsangabe. Kann nur in Kombination mit der Jahresangabe eingesetzt werden.
 - `day`: Tagesangabe. Kann nur in Kombination mit Monats- und Jahresangabe eingesetzt werden.
 
@@ -89,3 +89,4 @@ Du kannst mit diesen vier Parametern die anzuzeigenden Spalten konfigurieren. M�
 - `[criticalmass-ride-list city="hamburg" year="2017" col-city=false]`: Zeige alle Touren aus Hamburg aus dem Jahr 2017 und verstecke den Städtenamen.
 - `[criticalmass-ride-list region="germany" year="2017" month="12" col-estimation="true"]`: Zeige alle deutschen Critical-Mass-Touren mitsamt der geschätzten Teilnehmerzahlen aus dem Dezember 2017.
 - `[criticalmass-ride-list region="nordrhein-westfalen" year="2017" month="12" day="29"]`: Alle Touren in Nordrhein-Westfalen am 29. Dezember 2017.
+- `[criticalmass-ride-list city="hamburg" col-city="false" sort="date"]`: Zeige alle bekannten Touren aus Hamburg an, sortiert nach Datum.

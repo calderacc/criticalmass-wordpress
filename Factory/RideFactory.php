@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../Entity/Ride.php';
 require_once __DIR__ . '/../Api/Api.php';
 require_once __DIR__ . '/CityFactory.php';
+require_once __DIR__.'/../Exception/InvalidParameterException.php';
 
 class RideFactory
 {
@@ -18,7 +19,7 @@ class RideFactory
         $this->api = new Api();
     }
 
-    public function fetchRideData(int $year, int $month = null, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
+    public function fetchRideData(int $year = null, int $month = null, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
     {
         $parameters = [
             'year' => $year,
@@ -58,6 +59,8 @@ class RideFactory
 
         if (array_key_exists($sortFunction, $sortFunctionList)) {
             usort($rideList, $sortFunctionList[$sortFunction]);
+        } else {
+            throw new InvalidParameterException(sprintf('Ungültige Sortierfunktion: %s', $sortFunction));
         }
 
         return $rideList;
