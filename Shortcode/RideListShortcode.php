@@ -5,13 +5,16 @@ require_once __DIR__.'/../Util/LinkUtil.php';
 
 class RideListShortcode extends AbstractListShortcode
 {
+    /** @var array $atts */
+    protected $atts = [];
+
     public function rideList($attributeList = [], $content = null, $tag = '')
     {
         $attributeList = array_change_key_case((array)$attributeList, CASE_LOWER);
 
-        $atts = shortcode_atts([
+        $this->atts = shortcode_atts([
             'year' => date('Y'),
-            'month' => date('m'),
+            'month' => null,
             'day' => null,
             'city' => null,
             'region' => null,
@@ -21,24 +24,25 @@ class RideListShortcode extends AbstractListShortcode
             'col-location' => true,
             'col-datetime' => true,
             'col-city' => true,
+            'date-format' => 'd.m.Y H:i',
         ], $attributeList, $tag);
 
         $o = '<table>';
 
-        $o .= $this->createTableHeader($atts);
+        $o .= $this->createTableHeader();
 
         if (!is_null($content)) {
             $o .= apply_filters('the_content', $content);
             $o .= do_shortcode($content);
         }
 
-        $rideList = $this->rideFactory->fetchRideData($atts['year'], $atts['month'], $atts['day'], $atts['city'], $atts['region']);
+        $rideList = $this->rideFactory->fetchRideData($this->atts['year'], $this->atts['month'], $this->atts['day'], $this->atts['city'], $this->atts['region']);
 
-        $rideList = $this->rideFactory->sortRideList($rideList, $atts['sort']);
+        $rideList = $this->rideFactory->sortRideList($rideList, $this->atts['sort']);
 
         /** @var Ride $ride */
         foreach ($rideList as $ride) {
-            $o .= $this->createTableRow($ride, $atts);
+            $o .= $this->createTableRow($ride);
         }
 
         $o .= '</table>';
@@ -46,23 +50,23 @@ class RideListShortcode extends AbstractListShortcode
         return $o;
     }
 
-    protected function createTableHeader(array $atts = []): string
+    protected function createTableHeader(): string
     {
         $headerRow = '<tr>';
 
-        if ($atts['col-city']) {
+        if ($this->showColumn('city')) {
             $headerRow .= '<th>Stadt</th>';
         }
 
-        if ($atts['col-datetime']) {
+        if ($this->showColumn('datetime')) {
             $headerRow .= '<th>Datum</th>';
         }
 
-        if ($atts['col-location']) {
+        if ($this->showColumn('location')) {
             $headerRow .= '<th>Treffpunkt</th>';
         }
 
-        if ($atts['col-estimation']) {
+        if ($this->showColumn('estimation')) {
             $headerRow .= '<th>Teilnehmer</th>';
         }
 
@@ -72,25 +76,25 @@ class RideListShortcode extends AbstractListShortcode
 
     }
 
-    protected function createTableRow(Ride $ride, array $atts = []): string
+    protected function createTableRow(Ride $ride): string
     {
-        $timezone = new \DateTimeZone($atts['timezone']);
+        $timezone = new \DateTimeZone($this->atts['timezone']);
 
         $row = '<tr>';
 
-        if ($atts['col-city']) {
+        if ($this->showColumn('city')) {
             $row .= sprintf('<td><a href="%s">%s</a></td>', LinkUtil::createLinkForCity($ride->getCity()), $ride->getCity()->getName());
         }
 
-        if ($atts['col-datetime']) {
-            $row .= sprintf('<td><a href="%s">%s Uhr</a></td>', LinkUtil::createLinkForRide($ride), $ride->getDateTime()->setTimezone($timezone)->format('d.m.Y H:i'));
+        if ($this->showColumn('datetime')) {
+            $row .= sprintf('<td><a href="%s">%s</a></td>', LinkUtil::createLinkForRide($ride), $ride->getDateTime()->setTimezone($timezone)->format($this->atts['date-format']));
         }
 
-        if ($atts['col-location']) {
+        if ($this->showColumn('location')) {
             $row .= sprintf('<td>%s</td>', $ride->getLocation());
         }
 
-        if ($atts['col-estimation']) {
+        if ($this->showColumn('estimation')) {
             if ($ride->getEstimatedParticipants()) {
                 $row .= sprintf('<td>%s</td>', $ride->getEstimatedParticipants());
             } else {
@@ -102,5 +106,12 @@ class RideListShortcode extends AbstractListShortcode
         $row .= '</tr>';
 
         return $row;
+    }
+
+    protected function showColumn(string $col): bool
+    {
+        $value = $this->atts[sprintf('col-%s', $col)];
+
+        return $value === 'true' || $value === true;
     }
 }

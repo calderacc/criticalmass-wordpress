@@ -18,7 +18,7 @@ class RideFactory
         $this->api = new Api();
     }
 
-    public function fetchRideData(int $year, int $month, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
+    public function fetchRideData(int $year, int $month = null, int $day = null, string $citySlug = null, string $regionSlug = null): ?array
     {
         $parameters = [
             'year' => $year,
