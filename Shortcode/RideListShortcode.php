@@ -16,6 +16,8 @@ class RideListShortcode extends AbstractListShortcode
 
             $this->atts = $this->validateAttributes($attributeList, $tag);
 
+            $this->enforceDateTime();
+
             $o = '<table>';
 
             $o .= $this->createTableHeader();
@@ -144,5 +146,15 @@ class RideListShortcode extends AbstractListShortcode
         }
 
         return $atts;
+    }
+
+    protected function enforceDateTime(): void
+    {
+        if (!$this->atts['city']) {
+            $dateTime = new \DateTime();
+
+            $this->atts['year'] = $dateTime->format('Y');
+            $this->atts['month'] = $dateTime->format('m');
+        }
     }
 }
