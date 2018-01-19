@@ -54,6 +54,9 @@ class RideFactory
             },
             'date' => function($a, $b) {
                 return $a->getDateTime() > $b->getDateTime();
+            },
+            'participants' => function($a, $b) {
+                return $a->getEstimatedParticipants() > $b->getEstimatedParticipants();
             }
         ];
 
