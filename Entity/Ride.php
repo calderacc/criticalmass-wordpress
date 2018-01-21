@@ -84,7 +84,7 @@ class Ride
         return $this->dateTime;
     }
 
-    public function setDateTime(DateTime $dateTime = null): Ride
+    public function setDateTime(\DateTime $dateTime = null): Ride
     {
         $this->dateTime = $dateTime;
 
