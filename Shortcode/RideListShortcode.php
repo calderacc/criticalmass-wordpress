@@ -9,7 +9,7 @@ class RideListShortcode extends AbstractListShortcode
     /** @var array $atts */
     protected $atts = [];
 
-    public function rideList($attributeList = [], $content = null, $tag = '')
+    public function rideList(array $attributeList = [], $content = null, $tag = '')
     {
         try {
             $attributeList = array_change_key_case((array)$attributeList, CASE_LOWER);
