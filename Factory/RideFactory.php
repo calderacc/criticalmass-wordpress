@@ -36,6 +36,8 @@ class RideFactory
         foreach ($data as $rideData) {
             $ride = $this->convert($rideData);
 
+            $ride = $this->ensureTitle($ride);
+
             $rideList[] = $ride;
         }
 
@@ -84,6 +86,18 @@ class RideFactory
         $data = json_decode($this->api->fetch(sprintf('%s/current', $citySlug)));
 
         $ride = $this->convert($data);
+        $ride = $this->ensureTitle($ride);
+
+        return $ride;
+    }
+
+    public function ensureTitle(Ride $ride): Ride
+    {
+        if (!$ride->getTitle()) {
+            $title = sprintf('Critical Mass %s', $ride->getCity()->getName());
+
+            $ride->setTitle($title);
+        }
 
         return $ride;
     }
