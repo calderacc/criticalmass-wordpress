@@ -42,19 +42,19 @@ class RideListShortcode extends AbstractListShortcode
         $headerRow = '<tr>';
 
         if ($this->showColumn('city')) {
-            $headerRow .= '<th>Stadt</th>';
+            $headerRow .= sprintf('<th>%s</th>', __('Stadt', 'caldera_criticalmass'));
         }
 
         if ($this->showColumn('datetime')) {
-            $headerRow .= '<th>Datum</th>';
+            $headerRow .= sprintf('<th>%s</th>', __('Datum', 'caldera_criticalmass'));
         }
 
         if ($this->showColumn('location')) {
-            $headerRow .= '<th>Treffpunkt</th>';
+            $headerRow .= sprintf('<th>%s</th>', __('Treffpunkt', 'caldera_criticalmass'));
         }
 
         if ($this->showColumn('estimation')) {
-            $headerRow .= '<th>Teilnehmer</th>';
+            $headerRow .= sprintf('<th>%s</th>', __('Teilnehmer', 'caldera_criticalmass'));
         }
 
         $headerRow .= '</tr>';
@@ -85,7 +85,7 @@ class RideListShortcode extends AbstractListShortcode
             if ($ride->getEstimatedParticipants()) {
                 $row .= sprintf('<td>%s</td>', $ride->getEstimatedParticipants());
             } else {
-                $row .= sprintf('<td><a class="criticalmass-estimate-link" href="%s">ergänzen</a></td>', LinkUtil::createLinkForRideEstimate($ride));
+                $row .= sprintf('<td><a class="criticalmass-estimate-link" href="%s">%s</a></td>', LinkUtil::createLinkForRideEstimate($ride), __('ergänzen', 'caldera_criticalmass'));
             }
         }
 
