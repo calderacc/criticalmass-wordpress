@@ -1,12 +1,13 @@
 <?php
 /*
 Plugin Name: Critical Mass
-Plugin URI: https://criticalmass.one/
+Plugin URI: https://criticalmass.in/
 Description: Show critical mass related stuff in your blog
 Version: 0.1
 Author: Malte Hübner
 Author URI: https://maltehuebner.de
-License: MIT
+License: GPL2+
+License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 */
 
 require_once __DIR__.'/Widget/CriticalmassWidget.php';
