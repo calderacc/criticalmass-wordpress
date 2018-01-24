@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Critical Mass
+Plugin Name: Caldera Critical Mass
 Plugin URI: https://criticalmass.in/
 Description: Show critical mass related stuff in your blog
 Version: 0.1

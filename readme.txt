@@ -1,4 +1,7 @@
-# criticalmass-wordpress
+Caldera Critical Mass für Wordpress
+-----------------------------------
+
+1. Allgemeines
 
 Dieses Plugin ermöglicht es dir, Informationen über Critical-Mass-Touren in deinem Blog anzuzeigen.
 
@@ -7,17 +10,17 @@ Bislang sind diese zwei Funktionen möglich:
 1. Zeige in der Sidebar das Datum und den Treffpunkt für die nächste Critical Mass in deiner Stadt an.
 2. Binde eine Liste mit Critical-Mass-Touren aus deiner Region oder deinem Land ein.
 
-## Datenquelle
+1.1 Datenquelle
 
 Die Daten erhält das Plugin von der Webseite [criticalmass.in](https://criticalmass.in/). Es fragt die dortige Api nach aktuellen Tour- und Städtedaten ab. Um die Ladezeit deines Blogs zu verbessern, werden die abgefragten Daten gecachet, um unnötige Api-Anfragen zu vermeiden.
- 
+
 Es werden keine weiteren Daten mit criticalmass.in ausgetauscht und es werden keine Inhalte aus deinem Blog oder persönliche Daten deiner Besucher übertragen.
 
-# Systemvoraussetzungen
+2 Systemvoraussetzungen
 
 Das Plugin benötigt momentan mindestens PHP 5.6 und wurde mit Wordpress-Versionen ab 4.6 getestet.
 
-# Installation
+3 Installation
 
 1. Lade dieses Plugin als Zip-Datei herunter.
 2. Logge dich in deinem Wordpress-Administrationsbereich ein.
@@ -26,7 +29,7 @@ Das Plugin benötigt momentan mindestens PHP 5.6 und wurde mit Wordpress-Version
 5. Lade die Zip-Datei hoch.
 6. Aktiviere das Plugin in der Liste.
 
-# Deinstallation
+4 Deinstallation
 
 Genug vom Radfahren? Kein Problem: Du kannst das Plugin ganz einfach über den Wordpress-Administrationsbereich löschen:
 
@@ -35,9 +38,9 @@ Genug vom Radfahren? Kein Problem: Du kannst das Plugin ganz einfach über den W
 3. Deaktiviere das Critical-Mass-Plugin.
 4. Klicke direkt darunter auf `Löschen`.
 
-# Benutzung
+5 Benutzung
 
-## Critical-Mass-Widget
+5.1 Critical-Mass-Widget
 
 Dieses Plugin bringt ein Widget mit, dass du in der Sidebar deines Weblogs einsetzen kannst, um Details zu der nächsten Tour anzuzeigen.
 
@@ -49,14 +52,14 @@ Für das Widget gibt es ein paar Einstellungsmöglichkeiten; du kannst den Titel
 
 Wenn du möchtest, kannst du die Tourdaten auch auf einer kleinen Karte anzeigen lassen.
 
-## Tourliste
+5.2 Tourliste
 
 Mit dem Shortcode `[criticalmass-ride-list]` kannst du eine tabellarische Tourliste in einem Beitrag oder einer Seite einbetten. Die Liste zeigt in drei Spalten jeweils den Namen der Stadt, sowie Datum und Uhrzeit und den Treffpunkt der aktuellen Tour.
 
-### Parameter
+5.2.1 Parameter
 Du kannst die Darstellung der Liste mit einer Reihe von zusätzlichen Parametern beeinflussen:
 
-#### Datumsangaben
+5.2.1.1 Datumsangaben
 
 Mit diesen drei Parametern kannst du die Tabelleninhalte auf einen bestimmten Zeitraum beschränken.
 
@@ -64,7 +67,7 @@ Mit diesen drei Parametern kannst du die Tabelleninhalte auf einen bestimmten Ze
 - `month`: Monatsangabe. Kann nur in Kombination mit der Jahresangabe eingesetzt werden.
 - `day`: Tagesangabe. Kann nur in Kombination mit Monats- und Jahresangabe eingesetzt werden.
 
-#### Geografische Angaben
+5.2.1.2 Geografische Angaben
 
 - `city`: Zeige lediglich Touren aus der angegebenen Stadt an.
 - `region`: Zeige lediglich Touren aus der angegebenen Region an.
@@ -73,17 +76,17 @@ Bei den Werten für diese Parameter handelt es sich um so genannte Slugs, die du
 
 Beispielsweise lautet der Slug für Hamburg `hamburg` und für München `muenchen`. Für Touren aus Deutschland kannst du die Region `germany` angeben, für Touren aus Schleswig-Holstein die Region `schleswig-holstein`.
 
-#### Sortierreihenfolge
+5.2.1.3 Sortierreihenfolge
 
 - `sort-col`: Gibt an, nach welchem Wert die Tabelle sortiert werden soll. Mögliche Werte sind `city`, `date` und `estimation`. (Standardwert: `city`)
 - `sort-order`: Benennt die Sortierreihenfolge. Mögliche Werte sind `asc` und `desc`. (Standardwert: `asc`)
 
-#### Datumsdarstellungen
+5.2.1.4 Datumsdarstellungen
 
 - `timezone`: Angabe der Zeitzone. Ohne diesen Parameter wird die jeweilige Zeitzone deines Wordpress-Blogs verwendet.
 - `date-format`: Steuert die Formatierung der Datumsangabe mit der [`date`](http://php.net/manual/de/function.date.php)-Funktion. (Standardwert: `d.m.Y H:i`)
 
-#### anzuzeigende Spalten
+5.2.1.5 anzuzeigende Spalten
 
 Du kannst mit diesen vier Parametern die anzuzeigenden Spalten konfigurieren. Mögliche Werte sind jeweils `true` und `false`:
 - `col-city`: Stadt (Standardwert: `true`)
@@ -91,7 +94,7 @@ Du kannst mit diesen vier Parametern die anzuzeigenden Spalten konfigurieren. M�
 - `col-datetime`: Datum und Uhrzeit (Standardwert: `true`)
 - `col-estimation`: Teilnehmerzahlen (Standardwert: `false`)
 
-### Beispiele
+5.2.2 Beispiele
 
 - `[criticalmass-ride-list city="hamburg" year="2017" col-city=false]`: Zeige alle Touren aus Hamburg aus dem Jahr 2017 und verstecke den Städtenamen.
 - `[criticalmass-ride-list region="germany" year="2017" month="12" col-estimation="true"]`: Zeige alle deutschen Critical-Mass-Touren mitsamt der geschätzten Teilnehmerzahlen aus dem Dezember 2017.
