@@ -1,7 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../Cache/Cache.php';
-require_once __DIR__.'/../Exception/ApiException.php';
+namespace Caldera\CriticalmassWordpress\Api;
+
+use Caldera\CriticalmassWordpress\Cache\Cache;
+use Caldera\CriticalmassWordpress\Exception\ApiException;
 
 class Api
 {
@@ -26,7 +28,7 @@ class Api
         $response = wp_remote_get($apiUrl);
 
         if (!is_array($response) || 200 !== $response['response']['code']) {
-            throw new Exception(sprintf('Api-Endpunkt %s nicht erreichbar oder ungültige Antwort', $apiUrl));
+            throw new ApiException(sprintf('Api-Endpunkt %s nicht erreichbar oder ungültige Antwort', $apiUrl));
         }
 
         $this->cache->set($apiUrl, $response['body']);

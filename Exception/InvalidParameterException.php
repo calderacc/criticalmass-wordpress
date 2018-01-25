@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/CriticalmassException.php';
+namespace Caldera\CriticalmassWordpress\Exception;
 
 class InvalidParameterException extends CriticalmassException
 {

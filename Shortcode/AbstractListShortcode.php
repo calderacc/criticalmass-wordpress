@@ -1,7 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../Factory/CityFactory.php';
-require_once __DIR__ . '/../Factory/RideFactory.php';
+namespace Caldera\CriticalmassWordpress\Shortcode;
+
+use Caldera\CriticalmassWordpress\Factory\CityFactory;
+use Caldera\CriticalmassWordpress\Factory\RideFactory;
 
 abstract class AbstractListShortcode
 {

@@ -1,8 +1,10 @@
 <?php
 
-require_once __DIR__.'/AbstractListShortcode.php';
-require_once __DIR__.'/../Util/LinkUtil.php';
-require_once __DIR__.'/../Exception/InvalidParameterException.php';
+namespace Caldera\CriticalmassWordpress\Shortcode;
+
+use Caldera\CriticalmassWordpress\Entity\Ride;
+use Caldera\CriticalmassWordpress\Exception\InvalidParameterException;
+use Caldera\CriticalmassWordpress\Util\LinkUtil;
 
 class RideListShortcode extends AbstractListShortcode
 {

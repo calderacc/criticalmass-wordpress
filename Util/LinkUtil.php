@@ -1,5 +1,10 @@
 <?php
 
+namespace Caldera\CriticalmassWordpress\Util;
+
+use Caldera\CriticalmassWordpress\Entity\City;
+use Caldera\CriticalmassWordpress\Entity\Ride;
+
 class LinkUtil
 {
     const HOSTNAME = 'https://criticalmass.in';

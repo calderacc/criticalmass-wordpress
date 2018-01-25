@@ -7,9 +7,15 @@ Bislang sind diese zwei Funktionen möglich:
 1. Zeige in der Sidebar das Datum und den Treffpunkt für die nächste Critical Mass in deiner Stadt an.
 2. Binde eine Liste mit Critical-Mass-Touren aus deiner Region oder deinem Land ein.
 
+## Datenquelle
+
+Die Daten erhält das Plugin von der Webseite [criticalmass.in](https://criticalmass.in/).  Es fragt die dortige Api nach aktuellen Tour- und Städtedaten ab. Der Zugriff auf die Api ist selbstverständlich kostenlos und unbeschränkt, du brauchst dafür keine speziellen Zugangsdaten. Um die Ladezeit deines Blogs zu verbessern, werden die abgefragten Daten gecachet, um unnötige Api-Anfragen zu vermeiden.
+ 
+Es werden keine weiteren Daten mit criticalmass.in ausgetauscht und es werden keine Inhalte aus deinem Blog oder persönliche Daten deiner Besucher übertragen.
+
 # Systemvoraussetzungen
 
-Das Plugin benötigt momentan mindestens PHP 7.1 und wurde mit Wordpress-Versionen ab 4.6 getestet.
+Das Plugin benötigt momentan mindestens PHP 5.6 und wurde mit Wordpress-Versionen ab 4.6 getestet.
 
 # Installation
 
