@@ -10,11 +10,13 @@ License: GPL2+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 */
 
+use Caldera\CriticalmassWordpress\Autoloader;
 use Caldera\CriticalmassWordpress\Shortcode\RideListShortcode;
 use Caldera\CriticalmassWordpress\Widget\CriticalmassWidget;
 
-require_once __DIR__.'/Widget/CriticalmassWidget.php';
-require_once __DIR__.'/Shortcode/RideListShortcode.php';
+require_once __DIR__.'/Autoloader.php';
+
+spl_autoload_register([new Autoloader(), 'autoload']);
 
 add_action('init', function() {
     add_shortcode('criticalmass-ride-list', [new RideListShortcode(), 'rideList']);
