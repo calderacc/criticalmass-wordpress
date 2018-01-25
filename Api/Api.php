@@ -5,9 +5,6 @@ namespace Caldera\CriticalmassWordpress\Api;
 use Caldera\CriticalmassWordpress\Cache\Cache;
 use Caldera\CriticalmassWordpress\Exception\ApiException;
 
-require_once __DIR__ . '/../Cache/Cache.php';
-require_once __DIR__.'/../Exception/ApiException.php';
-
 class Api
 {
     const API_HOSTNAME = 'http://criticalmass.in/api';

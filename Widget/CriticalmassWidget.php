@@ -7,9 +7,6 @@ use Caldera\CriticalmassWordpress\Factory\RideFactory;
 use Caldera\CriticalmassWordpress\Util\LinkUtil;
 use WP_Widget;
 
-require_once __DIR__ . '/../Factory/CityFactory.php';
-require_once __DIR__ . '/../Factory/RideFactory.php';
-
 class CriticalmassWidget extends WP_Widget
 {
     protected $cityFactory;
