@@ -1,5 +1,11 @@
 <?php
 
+namespace Caldera\CriticalmassWordpress\Factory;
+
+use Caldera\CriticalmassWordpress\Api\Api;
+use Caldera\CriticalmassWordpress\Entity\Ride;
+use Caldera\CriticalmassWordpress\Exception\InvalidParameterException;
+
 require_once __DIR__ . '/../Entity/Ride.php';
 require_once __DIR__ . '/../Api/Api.php';
 require_once __DIR__ . '/CityFactory.php';

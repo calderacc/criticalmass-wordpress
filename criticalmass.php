@@ -10,6 +10,9 @@ License: GPL2+
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 */
 
+use Caldera\CriticalmassWordpress\Shortcode\RideListShortcode;
+use Caldera\CriticalmassWordpress\Widget\CriticalmassWidget;
+
 require_once __DIR__.'/Widget/CriticalmassWidget.php';
 require_once __DIR__.'/Shortcode/RideListShortcode.php';
 
@@ -21,5 +24,5 @@ add_action('init', function() {
 });
 
 add_action('widgets_init', function() {
-    register_widget('CriticalmassWidget');
+    register_widget(CriticalmassWidget::class);
 });

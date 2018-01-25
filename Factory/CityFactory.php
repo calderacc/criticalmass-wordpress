@@ -1,5 +1,10 @@
 <?php
 
+namespace Caldera\CriticalmassWordpress\Factory;
+
+use Caldera\CriticalmassWordpress\Api\Api;
+use Caldera\CriticalmassWordpress\Entity\City;
+
 require_once __DIR__ . '/../Entity/City.php';
 require_once __DIR__ . '/../Api/Api.php';
 

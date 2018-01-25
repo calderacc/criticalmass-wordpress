@@ -1,5 +1,7 @@
 <?php
 
+namespace Caldera\CriticalmassWordpress\Cache;
+
 class Cache
 {
     const TTL = 300;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Caldera\CriticalmassWordpress\Entity;
+
 class City
 {
     /** @var string $name */

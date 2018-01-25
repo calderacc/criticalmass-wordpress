@@ -1,5 +1,9 @@
 <?php
 
+namespace Caldera\CriticalmassWordpress\Entity;
+
+use DateTime;
+
 class Ride
 {
     /** @var City $city */
