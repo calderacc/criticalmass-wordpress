@@ -19,21 +19,7 @@ Das Plugin benötigt momentan mindestens PHP 5.6 und wurde mit Wordpress-Version
 
 # Installation
 
-1. Lade dieses Plugin als Zip-Datei herunter.
-2. Logge dich in deinem Wordpress-Administrationsbereich ein.
-3. Klicke auf den Menüpunkt `Plugins`.
-4. Wähle ganz oben neben der Überschrift `Plugin hochladen`.
-5. Lade die Zip-Datei hoch.
-6. Aktiviere das Plugin in der Liste.
-
-# Deinstallation
-
-Genug vom Radfahren? Kein Problem: Du kannst das Plugin ganz einfach über den Wordpress-Administrationsbereich löschen:
-
-1. Logge dich in deinem Wordpress-Administrationsbereich ein.
-2. Wähle den Menüpunkt `Plugins`.
-3. Deaktiviere das Critical-Mass-Plugin.
-4. Klicke direkt darunter auf `Löschen`.
+Du kannst das Plugin wie gewohnt über Wordpress installieren: [https://de.wordpress.org/plugins/maltehuebner-critical-mass/](https://de.wordpress.org/plugins/maltehuebner-critical-mass/)
 
 # Benutzung
 
