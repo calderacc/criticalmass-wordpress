@@ -3,7 +3,7 @@
 Plugin Name: Caldera Critical Mass
 Plugin URI: https://criticalmass.in/
 Description: Show critical mass related stuff in your blog
-Version: 1.0
+Version: 1.1
 Author: Malte Hübner
 Author URI: https://maltehuebner.de
 License: GPL2+
