@@ -19,7 +19,6 @@ Es gibt zwei Entwicklungszweige, `dev` und `legacy`, sowie einen `release`-Zweig
 
 Da viele Wordpress-Installationen immer noch mit PHP 5.5 und 5.6 betrieben werden, sollte die Kompatibilität zu diesen Versionen jedenfalls noch eine Weile gewährleistet bleiben.
 
-
 | Zweig  | PHP-Version | WordPress-Version |
 | ------ | ----------- | ----------------- |
 | dev    | +7.1        | +4.6              |
