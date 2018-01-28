@@ -5,6 +5,7 @@ namespace Caldera\CriticalmassWordpress\Widget;
 use Caldera\CriticalmassWordpress\Factory\CityFactory;
 use Caldera\CriticalmassWordpress\Factory\RideFactory;
 use Caldera\CriticalmassWordpress\Util\LinkUtil;
+use Caldera\CriticalmassWordpress\Util\TimeUtil;
 use WP_Widget;
 
 class CriticalmassWidget extends WP_Widget
@@ -118,12 +119,10 @@ class CriticalmassWidget extends WP_Widget
                 $ride->getLongitude()
             );
         } else {
-            $timezone = new \DateTimeZone(get_option('timezone_string'));
-
             $output .= sprintf('<p><a href="%s"><strong>%s</strong></a><br /><strong>Datum:</strong> %s Uhr<br /><strong>Treffpunkt:</strong> %s</p>',
                 LinkUtil::createLinkForRide($ride),
                 $ride->getTitle(),
-                $ride->getDateTime()->setTimezone($timezone)->format('d.m.Y H:i'),
+                $ride->getDateTime()->setTimezone(TimeUtil::getHostTimezone())->format('d.m.Y H:i'),
                 $ride->getLocation()
             );
         }
