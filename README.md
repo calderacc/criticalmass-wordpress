@@ -13,6 +13,18 @@ Die Daten erhält das Plugin von der Webseite [criticalmass.in](https://critical
  
 Es werden keine weiteren Daten mit criticalmass.in ausgetauscht und es werden keine Inhalte aus deinem Blog oder persönliche Daten deiner Besucher übertragen.
 
+# Entwicklungszweige
+
+Es gibt zwei Entwicklungszweige, `dev` und `legacy`, sowie einen `release`-Zweig. Entwickelt wurde bislang mit PHP 7.1 auf dem `dev`-Zweig, anschließend wurde der ganze PHP-7-spezifische Kram herausgelöscht und in den `legacy`-Zweig gemerget. Aus dem `legacy`-Zweig wird später das eigentliche Release gebaut.
+
+Da viele Wordpress-Installationen immer noch mit PHP 5.5 und 5.6 betrieben werden, sollte die Kompatibilität zu diesen Versionen jedenfalls noch eine Weile gewährleistet bleiben.
+
+
+| Zweig  | PHP-Version | WordPress-Version |
+| ------ | ----------- | ----------------- |
+| dev    | +7.1        | +4.6              |
+| legacy | +5.5        | +4.6              |
+
 # Systemvoraussetzungen
 
 Das Plugin benötigt momentan mindestens PHP 5.6 und wurde mit Wordpress-Versionen ab 4.6 getestet.
