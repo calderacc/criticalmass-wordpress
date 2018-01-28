@@ -91,3 +91,15 @@ Du kannst mit diesen vier Parametern die anzuzeigenden Spalten konfigurieren. M�
 - `[criticalmass-ride-list region="germany" year="2017" month="12" col-estimation="true"]`: Zeige alle deutschen Critical-Mass-Touren mitsamt der geschätzten Teilnehmerzahlen aus dem Dezember 2017.
 - `[criticalmass-ride-list region="nordrhein-westfalen" year="2017" month="12" day="29"]`: Alle Touren in Nordrhein-Westfalen am 29. Dezember 2017.
 - `[criticalmass-ride-list city="hamburg" col-city="false" sort-col="date"]`: Zeige alle bekannten Touren aus Hamburg an, sortiert nach Datum.
+
+== Screenshots ==
+
+1. Critical-Mass-Widget für die Stadt Kiel
+2. Einstellmöglichkeiten für Widgets
+3. Auflistung diverser Städte mit einem Shortcode
+
+== Changelog ==
+
+* Version 1.1: 2018-01-28
+  * fehlenden Doppelpunkt ergänzt
+  * Darstellung der Zeitzone im Text-Widget repariert

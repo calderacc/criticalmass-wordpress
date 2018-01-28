@@ -5,6 +5,7 @@ namespace Caldera\CriticalmassWordpress\Widget;
 use Caldera\CriticalmassWordpress\Factory\CityFactory;
 use Caldera\CriticalmassWordpress\Factory\RideFactory;
 use Caldera\CriticalmassWordpress\Util\LinkUtil;
+use Caldera\CriticalmassWordpress\Util\TimeUtil;
 use WP_Widget;
 
 class CriticalmassWidget extends WP_Widget
@@ -39,7 +40,7 @@ class CriticalmassWidget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Titel', 'caldera_criticalmass_widget'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Titel:', 'caldera_criticalmass_widget'); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
         </p>
 
@@ -121,7 +122,7 @@ class CriticalmassWidget extends WP_Widget
             $output .= sprintf('<p><a href="%s"><strong>%s</strong></a><br /><strong>Datum:</strong> %s Uhr<br /><strong>Treffpunkt:</strong> %s</p>',
                 LinkUtil::createLinkForRide($ride),
                 $ride->getTitle(),
-                $ride->getDateTime()->format('d.m.Y H:i'),
+                $ride->getDateTime()->setTimezone(TimeUtil::getHostTimezone())->format('d.m.Y H:i'),
                 $ride->getLocation()
             );
         }
